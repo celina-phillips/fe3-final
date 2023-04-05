@@ -3,7 +3,7 @@ import Card from '../Components/Card'
 import { useGlobalStates } from '../Components/utils/Context.jsx'
 
 
-
+//
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
