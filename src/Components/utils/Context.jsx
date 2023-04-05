@@ -3,8 +3,20 @@ import { createContext, useContext, useState, useEffect, useReducer } from "reac
 
 const GlobalStates = createContext()
 
+const initialFavState = JSON.parse(localStorage.getItem('favs')) || []
+const favReducer = (state, action) => {
+    switch(action.type){
+        case 'ADD_FAV':
+            return [...state, action.payload]
+        default:
+            throw new Error
+    }
+}
+
+
 const Context = ({children}) => {
     const [dentistas, setDentistas] = useState([])
+    const [favState, favDispatch] = useReducer(favReducer, initialFavState)
 
     const url = `https://jsonplaceholder.typicode.com/users`
     useEffect(() => {
@@ -13,10 +25,14 @@ const Context = ({children}) => {
         .then(data => setDentistas(data))
     }, [])
 
+    useEffect(() => {
+        localStorage.setItem('favs', JSON.stringify(favState))
+    }, [favState])
+
 
 
 return (
-    <GlobalStates.Provider value = {{dentistas}}>
+    <GlobalStates.Provider value = {{dentistas, favState, favDispatch}}>
         {children}
     </GlobalStates.Provider>
 )

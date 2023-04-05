@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useGlobalStates } from "./utils/Context";
+
+
 
 
 
@@ -7,7 +10,9 @@ const Card = ({ name, username, key }) => {
 
   const addFav = ()=>{
     // Aqui iria la logica para agregar la Card en el localStorage
+    favDispatch({type: 'ADD_FAV', payload: dentist})
   }
+  const {favDispatch} = useGlobalStates()
 
   return (
     <div className="card">
