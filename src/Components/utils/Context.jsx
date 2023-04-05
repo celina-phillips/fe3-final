@@ -16,6 +16,7 @@ const favReducer = (state, action) => {
 
 const Context = ({children}) => {
     const [dentistas, setDentistas] = useState([])
+    const [theme, setTheme]= useState(false)
     const [favState, favDispatch] = useReducer(favReducer, initialFavState)
 
     const url = `https://jsonplaceholder.typicode.com/users`
@@ -32,7 +33,7 @@ const Context = ({children}) => {
 
 
 return (
-    <GlobalStates.Provider value = {{dentistas, favState, favDispatch}}>
+    <GlobalStates.Provider value = {{dentistas, favState, favDispatch,theme,setTheme}}>
         {children}
     </GlobalStates.Provider>
 )

@@ -6,7 +6,7 @@ import { useGlobalStates } from "./utils/Context";
 
 
 
-const Card = ({ name, username, key }) => {
+const Card = ({dentist,key}) => {
 
   const addFav = ()=>{
     // Aqui iria la logica para agregar la Card en el localStorage
@@ -18,9 +18,9 @@ const Card = ({ name, username, key }) => {
     <div className="card">
         {/* En cada card deberan mostrar en name - username y el id */}
         <Link to={'/detail/' + key} key={key}>
-          <h2>{name}</h2>
-          <h3>{username}</h3>
-          <h4>{key}</h4>
+          <h2>{dentist.name}</h2>
+          <h3>{dentist.username}</h3>
+          <h4>{dentist.key}</h4>
         </Link>
 
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}

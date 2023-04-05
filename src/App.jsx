@@ -9,9 +9,11 @@ import Contact from "./Routes/Contact.jsx"
 
 
 
+
+
 function App() {
   return (
-      <div className="App">
+      <div className={"App"}>
           <Navbar/>
           <Routes>
             <Route path="/" element={<Home/>}/>

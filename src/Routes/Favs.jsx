@@ -8,9 +8,10 @@ import { useGlobalStates } from "../Components/utils/Context";
 const Favs = () => {
 
   const {favState} = useGlobalStates()
+  const {theme} = useGlobalStates()
 
   return (
-    <>
+    <React.Fragment className={theme?"dark":""} >
       <h1>Dentists Favs</h1>
       <div className="card-grid">
         {/* este componente debe consumir los destacados del localStorage */}
@@ -19,7 +20,7 @@ const Favs = () => {
           <Card key={dentistFav.id} dentistFav={dentistFav}/>
         })}
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
