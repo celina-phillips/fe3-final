@@ -5,33 +5,20 @@ import { useReducer } from 'react'
 
 const Form = () => {
   //Aqui deberan implementar el form completo con sus validaciones
-
-  const initialState = {
-    name: "",
-    email: ""
-  }
-  //no me esta funcionando el use reducer ver eso
-  const userReducer = (state, action) => {
-    switch (action.type) {
-      case 'name':
-        return  {name: action.payload, ...state}
-      case 'email':
-        return  {email: action.payload, ...state}
-      default:
-        throw new Error
-    }
-  }
   
-  const [userState, userDispatch] = useReducer(userReducer,initialState)
+  const [user, setUser] = useState({
+    name:"",
+    email:""
+  })
   const [show, setShow] = useState(false)
   const [error, setError] = useState(false)
 
   {/* Me falta validar el email */}
-  {/*emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;  --  && emailRegex.test(userState.email)*/}
+  const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i; 
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if(userState.name.length > 5){
+    if(user.name.length > 5  && emailRegex.test>(user.email)){
       setShow(true)
       setError(false)
     }else{
@@ -43,12 +30,12 @@ const Form = () => {
     <div>
       <form onSubmit= {handleSubmit}>
         <label>Name</label>
-        <input type="text" onChange={(event)=> userDispatch({type:'name', payload: event.target.value})}/>
+        <input type="text" onChange={(event)=> setUser({...user, name: event.target.value})}/>
         <label>Email</label>
-        <input type="email" onChange={(event)=> userDispatch({type:'email', payload: event.target.value})}/>
+        <input type="email" onChange={(event)=> setUser({...user, email: event.target.value})}/>
         <button>Enviar</button>
       </form>
-      {show && <h3>Gracias {userState.name} te contactaremos cuanto antes vía email</h3>}
+      {show && <h3>Gracias {user.name} te contactaremos cuanto antes vía email</h3>}
       {error&& <p>Coloque la información correcta</p>}
     </div>
   )
